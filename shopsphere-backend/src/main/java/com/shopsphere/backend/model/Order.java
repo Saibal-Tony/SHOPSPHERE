@@ -32,9 +32,8 @@ public class Order {
     @Builder.Default
     private OrderStatus status = OrderStatus.PENDING;
 
-    private BigDecimal totalPrice;
+    private BigDecimal totalAmount;
     private String shippingAddress;
-    private String paymentMethod;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;

@@ -8,7 +8,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "carts")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Cart {
 
     @Id
@@ -16,7 +20,7 @@ public class Cart {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -25,12 +29,12 @@ public class Cart {
 
     public BigDecimal getTotalPrice() {
         return items.stream()
-            .map(item -> {
-                BigDecimal price = item.getProduct().getDiscountedPrice() != null
-                    ? item.getProduct().getDiscountedPrice()
-                    : item.getProduct().getPrice();
-                return price.multiply(BigDecimal.valueOf(item.getQuantity()));
-            })
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .map(item -> {
+                    BigDecimal price = item.getProduct().getDiscountedPrice() != null
+                            ? item.getProduct().getDiscountedPrice()
+                            : item.getProduct().getPrice();
+                    return price.multiply(BigDecimal.valueOf(item.getQuantity()));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

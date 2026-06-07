@@ -6,7 +6,11 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_items")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderItem {
 
     @Id
@@ -22,7 +26,7 @@ public class OrderItem {
     private Product product;
 
     private Integer quantity;
+    private BigDecimal priceAtPurchase;
     private String size;
     private String color;
-    private BigDecimal priceAtPurchase;
 }

@@ -17,7 +17,8 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping
-    public ResponseEntity<Cart> getCart(@AuthenticationPrincipal UserDetails user) {
+    public ResponseEntity<Cart> getCart(
+            @AuthenticationPrincipal UserDetails user) {
         return ResponseEntity.ok(cartService.getCart(user.getUsername()));
     }
 
@@ -28,23 +29,24 @@ public class CartController {
         return ResponseEntity.ok(cartService.addItem(user.getUsername(), req));
     }
 
-    @DeleteMapping("/remove/{productId}")
-    public ResponseEntity<Cart> removeItem(
-            @AuthenticationPrincipal UserDetails user,
-            @PathVariable Long productId) {
-        return ResponseEntity.ok(cartService.removeItem(user.getUsername(), productId));
-    }
-
-    @PutMapping("/update/{productId}")
+    @PutMapping("/update/{itemId}")
     public ResponseEntity<Cart> updateItem(
             @AuthenticationPrincipal UserDetails user,
-            @PathVariable Long productId,
+            @PathVariable Long itemId,
             @RequestParam int quantity) {
-        return ResponseEntity.ok(cartService.updateItem(user.getUsername(), productId, quantity));
+        return ResponseEntity.ok(cartService.updateItem(user.getUsername(), itemId, quantity));
+    }
+
+    @DeleteMapping("/remove/{itemId}")
+    public ResponseEntity<Cart> removeItem(
+            @AuthenticationPrincipal UserDetails user,
+            @PathVariable Long itemId) {
+        return ResponseEntity.ok(cartService.removeItem(user.getUsername(), itemId));
     }
 
     @DeleteMapping("/clear")
-    public ResponseEntity<Void> clearCart(@AuthenticationPrincipal UserDetails user) {
+    public ResponseEntity<Void> clearCart(
+            @AuthenticationPrincipal UserDetails user) {
         cartService.clearCart(user.getUsername());
         return ResponseEntity.noContent().build();
     }
