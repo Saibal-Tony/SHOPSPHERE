@@ -15,7 +15,7 @@ export const register = async (
   return res.data;
 };
 
-export const getMe = async () => {
+export const getMe = async (): Promise<AuthResponse> => {
   const res = await api.get("/auth/me");
   return res.data;
 };

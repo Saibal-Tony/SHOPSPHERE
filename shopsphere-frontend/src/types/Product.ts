@@ -47,9 +47,11 @@ export interface User {
 
 export interface AuthResponse {
   token: string;
-  user: User;
+  id: number;
+  username: string;
+  email: string;
+  role: string;
 }
-
 export interface ProductFilters {
   category?: string;
   subCategory?: string;

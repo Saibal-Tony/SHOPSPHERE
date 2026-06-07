@@ -28,7 +28,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (token) {
       getMe()
-        .then(setUser)
+        .then((res) => {
+          setUser({
+            id: res.id,
+            username: res.username,
+            email: res.email,
+            role: res.role as "USER" | "ADMIN",
+          });
+        })
         .catch(() => logout());
     }
   }, []);
