@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProductById } from "../../api/productApi";
+import { useCart } from "../../context/CartContext";
 
 export default function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -10,6 +11,7 @@ export default function ProductDetailsPage() {
   const [imgIdx, setImgIdx] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
 
   const {
     data: product,
@@ -55,6 +57,15 @@ export default function ProductDetailsPage() {
       alert("Please select a size");
       return;
     }
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price: Number(product.discountedPrice || product.price),
+      image: product.imageUrls?.[0] || "",
+      size: selectedSize,
+      color: selectedColor,
+      quantity,
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
