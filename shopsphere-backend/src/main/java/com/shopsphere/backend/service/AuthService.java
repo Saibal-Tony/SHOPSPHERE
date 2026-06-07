@@ -30,21 +30,26 @@ public class AuthService {
                 .role(User.Role.USER)
                 .build();
 
-        userRepository.save(user);
-        String token = jwtService.generateToken(user.getEmail());
+        User saved = userRepository.save(user);
+        String token = jwtService.generateToken(saved.getEmail());
 
         return AuthResponse.builder()
                 .token(token)
-                .id(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .role(user.getRole().name())
+                .id(saved.getId())
+                .username(saved.getUsername())
+                .email(saved.getEmail())
+                .role(saved.getRole().name())
                 .build();
     }
 
     public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(), request.getPassword()));
+        } catch (BadCredentialsException e) {
+            throw new RuntimeException("Invalid email or password");
+        }
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
