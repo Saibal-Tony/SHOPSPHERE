@@ -137,15 +137,15 @@ export default function ProductCard({ product }: Props) {
           {hasDiscount ? (
             <>
               <span className="text-sm font-bold text-gray-900">
-                ${product.discountedPrice}
+                ₹{product.discountedPrice}
               </span>
               <span className="text-xs text-gray-400 line-through">
-                ${product.price}
+                ₹{product.price}
               </span>
             </>
           ) : (
             <span className="text-sm font-bold text-gray-900">
-              ${product.price}
+              ₹{product.price}
             </span>
           )}
         </div>

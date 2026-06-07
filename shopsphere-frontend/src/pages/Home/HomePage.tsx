@@ -337,27 +337,27 @@ export default function HomePage() {
               {
                 src: "/src/assets/women/specials/specials_1.jpg",
                 name: "Special Edition Top",
-                price: "$89",
+                price: "₹899",
               },
               {
                 src: "/src/assets/men/pants/pants_1.jpg",
                 name: "Cargo Trousers",
-                price: "$119",
+                price: "₹1199",
               },
               {
                 src: "/src/assets/bags/bags_5.jpg",
                 name: "Mini Crossbody",
-                price: "$99",
+                price: "₹999",
               },
               {
                 src: "/src/assets/accessories/caps/caps_1.jpg",
                 name: "Washed Cap",
-                price: "$39",
+                price: "₹399",
               },
               {
                 src: "/src/assets/women/frock/frock_2.jpg",
                 name: "Floral Midi Dress",
-                price: "$129",
+                price: "₹1299",
               },
             ].map((item, i) => (
               <Link key={i} to="/products" className="group">
