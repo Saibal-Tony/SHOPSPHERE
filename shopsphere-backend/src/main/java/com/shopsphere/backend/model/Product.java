@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,32 +31,34 @@ public class Product {
     @Column(precision = 10, scale = 2)
     private BigDecimal discountedPrice;
 
-    private String category; // men, women, bags, beauty, electronics, accessories
-    private String subCategory; // shirts, pants, watches, etc.
+    private String category;
+    private String subCategory;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "image_url")
-    private List<String> imageUrls;
+    @Builder.Default
+    private List<String> imageUrls = new ArrayList<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "product_sizes", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "size")
-    private List<String> sizes;
+    @Builder.Default
+    private List<String> sizes = new ArrayList<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "product_colors", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "color")
-    private List<String> colors;
+    @Builder.Default
+    private List<String> colors = new ArrayList<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "product_tags", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "tag")
-    private List<String> tags;
+    @Builder.Default
+    private List<String> tags = new ArrayList<>();
 
-    @Column(precision = 3, scale = 2)
     private Double rating = 0.0;
-
     private Integer reviewCount = 0;
     private Boolean inStock = true;
     private Boolean isFeatured = false;
