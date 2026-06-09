@@ -6,9 +6,10 @@ import ProductDetailsPage from "../pages/Product/ProductDetailsPage";
 import CartPage from "../pages/Cart/CartPage";
 import LoginPage from "../pages/Auth/LoginPage";
 import RegisterPage from "../pages/Auth/RegisterPage";
-import OrdersPage from "../pages/Orders/OrdersPage.tsx";
+import OrdersPage from "../pages/Orders/OrdersPage";
 import AdminDashboardPage from "../pages/Admin/AdminDashboardPage";
 import ProtectedRoute from "../components/ProtectedRoute";
+import CheckoutPage from "../pages/Checkout/CheckoutPage";
 
 export default function AppRoutes() {
   return (
@@ -36,6 +37,7 @@ export default function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Route>
     </Routes>
   );

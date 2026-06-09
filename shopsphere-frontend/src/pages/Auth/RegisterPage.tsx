@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { register } from "../../api/authApi";
+import { useToast } from "../../context/ToastContext";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -15,6 +16,7 @@ export default function RegisterPage() {
   const [showPass, setShowPass] = useState(false);
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const update = (k: string, v: string) =>
     setForm((prev) => ({ ...prev, [k]: v }));
@@ -39,9 +41,12 @@ export default function RegisterPage() {
         email: res.email,
         role: res.role as "USER" | "ADMIN",
       });
+      showToast(`Welcome to ShopSphere, ${res.username}!`, "success");
       navigate("/");
     } catch (err: any) {
-      setError(err.response?.data?.error || "Registration failed");
+      const msg = err.response?.data?.error || "Registration failed";
+      setError(msg);
+      showToast(msg, "error");
     } finally {
       setLoading(false);
     }
@@ -49,7 +54,6 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-[#f9f9f7] flex">
-      {/* Left — Visual */}
       <div className="hidden lg:block flex-1 bg-gray-900 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-30"
@@ -86,7 +90,6 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* Right — Form */}
       <div className="flex-1 flex flex-col justify-center px-8 sm:px-16 lg:px-24 py-16">
         <div className="max-w-sm w-full mx-auto">
           <Link
@@ -95,7 +98,6 @@ export default function RegisterPage() {
           >
             ShopSphere
           </Link>
-
           <div className="mt-10">
             <h1 className="font-serif text-3xl text-gray-900 font-bold mb-2">
               Create account
@@ -104,13 +106,11 @@ export default function RegisterPage() {
               Join thousands of fashion lovers
             </p>
           </div>
-
           {error && (
             <div className="mt-6 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl">
               {error}
             </div>
           )}
-
           <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
             {[
               {
@@ -140,7 +140,6 @@ export default function RegisterPage() {
                 />
               </div>
             ))}
-
             <div>
               <label className="block text-xs font-semibold text-gray-700 mb-2 tracking-wide uppercase">
                 Password
@@ -181,7 +180,6 @@ export default function RegisterPage() {
                 </button>
               </div>
             </div>
-
             <div>
               <label className="block text-xs font-semibold text-gray-700 mb-2 tracking-wide uppercase">
                 Confirm Password
@@ -195,7 +193,6 @@ export default function RegisterPage() {
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-gray-400 bg-white transition-colors"
               />
             </div>
-
             <button
               type="submit"
               disabled={loading}
@@ -204,7 +201,6 @@ export default function RegisterPage() {
               {loading ? "Creating account..." : "Create Account"}
             </button>
           </form>
-
           <p className="mt-6 text-center text-sm text-gray-500">
             Already have an account?{" "}
             <Link

@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProductById } from "../../api/productApi";
 import { useCart } from "../../context/CartContext";
+import { useToast } from "../../context/ToastContext";
 
 export default function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -12,6 +13,7 @@ export default function ProductDetailsPage() {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const { showToast } = useToast();
 
   const {
     data: product,
@@ -54,7 +56,7 @@ export default function ProductDetailsPage() {
 
   const handleAddToCart = () => {
     if (!selectedSize && product.sizes?.length > 0) {
-      alert("Please select a size");
+      showToast("Please select a size", "error");
       return;
     }
     addItem({
@@ -67,6 +69,7 @@ export default function ProductDetailsPage() {
       quantity,
     });
     setAdded(true);
+    showToast(`${product.name} added to cart!`, "success");
     setTimeout(() => setAdded(false), 2000);
   };
 

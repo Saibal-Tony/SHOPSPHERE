@@ -1,0 +1,9 @@
+# FRONTEND
+cd shopsphere-frontend
+npm run dev
+
+# BACKEND
+cd shopsphere-backend
+mvn clean
+$env:MAVEN_OPTS="-Xmx512m -Xms256m"
+mvn spring-boot:run
