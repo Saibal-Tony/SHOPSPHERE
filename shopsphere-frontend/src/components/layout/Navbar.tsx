@@ -37,7 +37,8 @@ export default function Navbar() {
     { label: "Home", to: "/" },
     { label: "Men", to: "/products?category=men" },
     { label: "Women", to: "/products?category=women" },
-    { label: "Accessories", to: "/products?category=accessories" },
+    { label: "Footwear", to: "/products?category=footwear" },
+    { label: "Bags", to: "/products?category=bags" },
     { label: "Beauty", to: "/products?category=beauty" },
     { label: "Electronics", to: "/products?category=electronics" },
   ];

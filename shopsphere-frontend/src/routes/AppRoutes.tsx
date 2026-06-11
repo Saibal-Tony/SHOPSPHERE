@@ -10,6 +10,7 @@ import OrdersPage from "../pages/Orders/OrdersPage";
 import AdminDashboardPage from "../pages/Admin/AdminDashboardPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import CheckoutPage from "../pages/Checkout/CheckoutPage";
+import WishlistPage from "../pages/Wishlist/WishlistPage";
 
 export default function AppRoutes() {
   return (
@@ -38,6 +39,7 @@ export default function AppRoutes() {
           }
         />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
       </Route>
     </Routes>
   );

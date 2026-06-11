@@ -14,11 +14,12 @@ const SORT_OPTIONS = [
   { label: "Top Rated", value: "rating" },
 ];
 const CATEGORIES = [
-  { label: "All", value: "" },
-  { label: "Men", value: "men" },
-  { label: "Women", value: "women" },
-  { label: "Bags", value: "bags" },
-  { label: "Beauty", value: "beauty" },
+  { label: "All",         value: "" },
+  { label: "Men",         value: "men" },
+  { label: "Women",       value: "women" },
+  { label: "Footwear",    value: "footwear" },
+  { label: "Bags",        value: "bags" },
+  { label: "Beauty",      value: "beauty" },
   { label: "Electronics", value: "electronics" },
   { label: "Accessories", value: "accessories" },
 ];

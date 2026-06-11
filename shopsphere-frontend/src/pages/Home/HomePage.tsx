@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PageTransition from "../../components/common/PageTransition";
+import AnimateOnScroll from "../../components/common/AnimateOnScroll";
 
 // Category data
 const categories = [
@@ -7,53 +8,59 @@ const categories = [
     label: "Men",
     to: "/products?category=men",
     emoji: "👔",
-    bg: "bg-stone-100",
+    bg: "bg-[#f0fafa]",
   },
   {
     label: "Women",
     to: "/products?category=women",
     emoji: "👗",
-    bg: "bg-rose-50",
+    bg: "bg-[#ccefef]/40",
+  },
+  {
+    label: "Footwear",
+    to: "/products?category=footwear",
+    emoji: "👟",
+    bg: "bg-[#6BA3BE]/10",
   },
   {
     label: "Bags",
     to: "/products?category=bags",
     emoji: "👜",
-    bg: "bg-amber-50",
+    bg: "bg-[#0C969C]/10",
   },
   {
     label: "Beauty",
     to: "/products?category=beauty",
     emoji: "✨",
-    bg: "bg-pink-50",
+    bg: "bg-[#032F30]/5",
   },
   {
     label: "Electronics",
     to: "/products?category=electronics",
     emoji: "🎧",
-    bg: "bg-blue-50",
+    bg: "bg-[#6BA3BE]/20",
   },
   {
     label: "Accessories",
     to: "/products?category=accessories",
     emoji: "💍",
-    bg: "bg-purple-50",
+    bg: "bg-[#f0fafa]",
   },
 ];
 
 // Collage items using your actual local images
 const collageItems = [
   {
-    src: "/src/assets/women/shirts/shirts_1.jpg",
+    src: "/assets/women/shirts/shirts_1.jpg",
     span: "row-span-2",
     label: "New Season",
   },
-  { src: "/src/assets/men/shirts/shirts_1.jpg", span: "", label: "Men's Edit" },
-  { src: "/src/assets/women/frock/frock_1.jpg", span: "", label: "Frocks" },
-  { src: "/src/assets/bags/bags_1.jpg", span: "row-span-2", label: "Bags" },
-  { src: "/src/assets/women/pants/pants_1.jpg", span: "", label: "Bottoms" },
+  { src: "/assets/men/shirts/shirts_1.jpg", span: "", label: "Men's Edit" },
+  { src: "/assets/women/frock/frock_1.jpg", span: "", label: "Frocks" },
+  { src: "/assets/bags/bags_1.jpg", span: "row-span-2", label: "Bags" },
+  { src: "/assets/women/pants/pants_1.jpg", span: "", label: "Bottoms" },
   {
-    src: "/src/assets/accessories/sunglasses/sunglasses_1.jpg",
+    src: "/assets/accessories/sunglasses/sunglasses_1.jpg",
     span: "",
     label: "Eyewear",
   },
@@ -61,32 +68,57 @@ const collageItems = [
 
 const featuredItems = [
   {
-    src: "/src/assets/men/shirts/shirts_2.jpg",
+    src: "/assets/men/shirts/shirts_2.jpg",
     name: "Classic Oversized Tee",
-    price: "$59",
+    price: "₹1,299",
     tag: "Men",
     to: "/products?category=men",
   },
   {
-    src: "/src/assets/women/shirts/shirts_2.jpg",
-    name: "Linen Summer Top",
-    price: "$79",
+    src: "/assets/women/shirts/shirts_2.jpg",
+    name: "Linen Crop Top",
+    price: "₹1,499",
     tag: "Women",
     to: "/products?category=women",
   },
   {
-    src: "/src/assets/bags/bags_3.jpg",
-    name: "Leather Tote Bag",
-    price: "$149",
+    src: "/assets/bags/bags_3.jpg",
+    name: "Mini Crossbody",
+    price: "₹2,999",
     tag: "Bags",
     to: "/products?category=bags",
   },
   {
-    src: "/src/assets/accessories/watches/watches_1.jpg",
-    name: "Minimal Watch",
-    price: "$199",
-    tag: "Accessories",
-    to: "/products?category=accessories",
+    src: "/assets/footwear/shoes_1.jpg",
+    name: "Chunky Sole Sneakers",
+    price: "₹3,999",
+    tag: "Shoes",
+    to: "/products?category=footwear",
+  },
+];
+
+// New arrivals
+const newArrivals = [
+  {
+    src: "/assets/women/specials/specials_1.jpg",
+    name: "Special Edition Top",
+    price: "₹1,899",
+  },
+  {
+    src: "/assets/men/pants/pants_1.jpg",
+    name: "Cargo Wide Leg",
+    price: "₹3,299",
+  },
+  { src: "/assets/bags/bags_5.jpg", name: "Canvas Tote", price: "₹1,299" },
+  {
+    src: "/assets/accessories/caps/caps_1.jpg",
+    name: "Washed Baseball Cap",
+    price: "₹899",
+  },
+  {
+    src: "/assets/women/frock/frock_2.jpg",
+    name: "Floral Midi Dress",
+    price: "₹3,799",
   },
 ];
 
@@ -97,7 +129,7 @@ export default function HomePage() {
         {/* ── HERO ── */}
         <section className="relative h-[92vh] min-h-[600px] overflow-hidden bg-gray-900">
           <img
-            src="/src/assets/hero.png"
+            src="/assets/hero.png"
             alt="Hero"
             className="absolute inset-0 w-full h-full object-cover opacity-75"
           />
@@ -161,83 +193,87 @@ export default function HomePage() {
         </div>
 
         {/* ── CATEGORIES ── */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-2">
-                Browse By
-              </p>
-              <h2 className="font-serif text-3xl md:text-4xl text-gray-900">
-                Categories
-              </h2>
-            </div>
-            <Link
-              to="/products"
-              className="text-sm text-gray-500 hover:text-gray-900 transition-colors underline underline-offset-4"
-            >
-              View all
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-            {categories.map((cat) => (
+        <AnimateOnScroll animation="bottom">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <p className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-2">
+                  Browse By
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl text-gray-900">
+                  Categories
+                </h2>
+              </div>
               <Link
-                key={cat.label}
-                to={cat.to}
-                className={`${cat.bg} rounded-2xl p-6 flex flex-col items-center gap-3 hover:scale-105 transition-transform duration-200 group`}
+                to="/products"
+                className="text-sm text-gray-500 hover:text-gray-900 transition-colors underline underline-offset-4"
               >
-                <span className="text-3xl">{cat.emoji}</span>
-                <span className="text-sm font-semibold text-gray-800 tracking-wide">
-                  {cat.label}
-                </span>
+                View all
               </Link>
-            ))}
-          </div>
-        </section>
+            </div>
+
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+              {categories.map((cat) => (
+                <Link
+                  key={cat.label}
+                  to={cat.to}
+                  className={`${cat.bg} rounded-2xl p-6 flex flex-col items-center gap-3 hover:scale-105 transition-transform duration-200 group`}
+                >
+                  <span className="text-3xl">{cat.emoji}</span>
+                  <span className="text-sm font-semibold text-gray-800 tracking-wide">
+                    {cat.label}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </AnimateOnScroll>
 
         {/* ── EDITORIAL COLLAGE ── */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-2">
-                Editorial
-              </p>
-              <h2 className="font-serif text-3xl md:text-4xl text-gray-900">
-                New Collection
-              </h2>
-            </div>
-            <Link
-              to="/products"
-              className="text-sm text-gray-500 hover:text-gray-900 transition-colors underline underline-offset-4"
-            >
-              Shop collection
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-3 grid-rows-2 gap-3 h-[600px]">
-            {collageItems.map((item, i) => (
+        <AnimateOnScroll animation="scale" delay={100}>
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <p className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-2">
+                  Editorial
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl text-gray-900">
+                  New Collection
+                </h2>
+              </div>
               <Link
-                key={i}
                 to="/products"
-                className={`relative overflow-hidden rounded-xl group bg-gray-200 ${item.span}`}
+                className="text-sm text-gray-500 hover:text-gray-900 transition-colors underline underline-offset-4"
               >
-                <img
-                  src={item.src}
-                  alt={item.label}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      `https://placehold.co/400x500/e5e7eb/9ca3af?text=${item.label}`;
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-4 left-4 text-white font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {item.label} →
-                </div>
+                Shop collection
               </Link>
-            ))}
-          </div>
-        </section>
+            </div>
+
+            <div className="grid grid-cols-3 grid-rows-2 gap-3 h-[600px]">
+              {collageItems.map((item, i) => (
+                <Link
+                  key={i}
+                  to="/products"
+                  className={`relative overflow-hidden rounded-xl group bg-gray-200 ${item.span}`}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.label}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src =
+                        `https://placehold.co/400x500/e5e7eb/9ca3af?text=${item.label}`;
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-4 left-4 text-white font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {item.label} →
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </AnimateOnScroll>
 
         {/* ── FEATURED PRODUCTS ── */}
         <section className="bg-white py-20">
@@ -261,32 +297,34 @@ export default function HomePage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {featuredItems.map((item, i) => (
-                <Link key={i} to={item.to} className="group">
-                  <div className="relative overflow-hidden rounded-xl bg-gray-100 aspect-[3/4] mb-4">
-                    <img
-                      src={item.src}
-                      alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src =
-                          `https://placehold.co/300x400/e5e7eb/9ca3af?text=${item.name}`;
-                      }}
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className="bg-white/90 text-gray-700 text-xs px-2.5 py-1 rounded-full font-medium">
-                        {item.tag}
-                      </span>
+                <AnimateOnScroll key={i} animation="bottom" delay={i * 100}>
+                  <Link key={i} to={item.to} className="group">
+                    <div className="relative overflow-hidden rounded-xl bg-gray-100 aspect-[3/4] mb-4">
+                      <img
+                        src={item.src}
+                        alt={item.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            `https://placehold.co/300x400/e5e7eb/9ca3af?text=${item.name}`;
+                        }}
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-white/90 text-gray-700 text-xs px-2.5 py-1 rounded-full font-medium">
+                          {item.tag}
+                        </span>
+                      </div>
+                      {/* Quick shop overlay */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gray-900/90 text-white text-center text-sm py-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        Quick Shop
+                      </div>
                     </div>
-                    {/* Quick shop overlay */}
-                    <div className="absolute inset-x-0 bottom-0 bg-gray-900/90 text-white text-center text-sm py-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      Quick Shop
-                    </div>
-                  </div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1">
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-gray-500">{item.price}</p>
-                </Link>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-gray-500">{item.price}</p>
+                  </Link>
+                </AnimateOnScroll>
               ))}
             </div>
           </div>

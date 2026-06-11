@@ -1,43 +1,44 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import AnimateOnScroll from "../../components/common/AnimateOnScroll";
+import PageTransition from "../../components/common/PageTransition";
+
+interface WishlistItem {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+}
 
 export default function WishlistPage() {
-  const [items] = useState([]);
+  const [items, setItems] = useState<WishlistItem[]>([]);
+
+  const removeItem = (id: number) => {
+    setItems((prev) => prev.filter((i) => i.id !== id));
+  };
 
   return (
-    <div className="min-h-screen bg-[#f0fafa]">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#031716] to-[#032F30] text-white py-16 px-8">
-        <AnimateOnScroll animation="bottom">
-          <div className="max-w-7xl mx-auto">
-            <p className="text-[#0C969C] text-xs tracking-[0.4em] uppercase mb-3">
-              Your Collection
+    <PageTransition>
+      <div className="min-h-screen bg-[#f0fafa]">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-[#031716] to-[#032F30] text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <p className="text-[#0C969C] text-xs tracking-[0.3em] uppercase mb-2">
+              Your
             </p>
-            <h1 className="font-serif text-5xl font-bold mb-2">Wishlist</h1>
-            <p className="text-white/40 text-sm">
-              Items you love, saved for later
+            <h1 className="font-serif text-4xl font-bold">Wishlist</h1>
+            <p className="text-white/50 text-sm mt-2">
+              {items.length} saved items
             </p>
           </div>
-        </AnimateOnScroll>
-      </div>
+        </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <AnimateOnScroll animation="scale">
-          <div className="text-center py-16">
-            {/* Animated heart */}
-            <div className="relative w-32 h-32 mx-auto mb-8">
-              <div
-                className="absolute inset-0 rounded-full bg-[#0C969C]/10"
-                style={{ animation: "pulse 2s ease-in-out infinite" }}
-              />
-              <div
-                className="absolute inset-4 rounded-full bg-[#0C969C]/20"
-                style={{ animation: "pulse 2s ease-in-out infinite 0.3s" }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {items.length === 0 ? (
+            <div className="text-center py-24">
+              <div className="w-24 h-24 rounded-full bg-[#0C969C]/10 flex items-center justify-center mx-auto mb-6">
                 <svg
-                  className="w-12 h-12 text-[#0C969C]"
+                  className="w-10 h-10 text-[#0C969C]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -50,58 +51,82 @@ export default function WishlistPage() {
                   />
                 </svg>
               </div>
-            </div>
-
-            <h2 className="font-serif text-3xl text-gray-900 mb-3">
-              Nothing saved yet
-            </h2>
-            <p className="text-gray-400 text-sm mb-10 max-w-md mx-auto leading-relaxed">
-              When you find something you love, tap the heart icon on any
-              product to save it here.
-            </p>
-
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 bg-[#031716] text-white px-8 py-4 rounded-full text-sm font-semibold hover:bg-[#0A7075] transition-all duration-300 hover:gap-4"
-            >
-              Discover Products
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <h2 className="font-serif text-2xl text-gray-900 mb-3">
+                Your wishlist is empty
+              </h2>
+              <p className="text-gray-400 text-sm mb-8 max-w-sm mx-auto">
+                Save items you love and come back to them anytime
+              </p>
+              <Link
+                to="/products"
+                className="inline-block bg-[#0A7075] text-white px-8 py-3.5 rounded-full text-sm font-semibold hover:bg-[#032F30] transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
-          </div>
-        </AnimateOnScroll>
-
-        {/* Suggestion strip */}
-        <AnimateOnScroll animation="bottom" delay={200}>
-          <div className="mt-8 text-center">
-            <p className="text-xs text-gray-400 tracking-widest uppercase mb-6">
-              You might like
-            </p>
-            <div className="flex justify-center gap-3 flex-wrap">
-              {["Men", "Women", "Bags", "Beauty", "Electronics"].map((cat) => (
-                <Link
-                  key={cat}
-                  to={`/products?category=${cat.toLowerCase()}`}
-                  className="px-5 py-2.5 rounded-full border border-[#0A7075]/30 text-[#0A7075] text-sm font-medium hover:bg-[#0A7075] hover:text-white transition-all duration-300"
+                Discover Products
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
-                  {cat}
-                </Link>
+                  <Link to={`/products/${item.id}`}>
+                    <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "https://placehold.co/300x400/e5e7eb/9ca3af?text=img";
+                        }}
+                      />
+                    </div>
+                  </Link>
+                  <button
+                    onClick={() => removeItem(item.id)}
+                    className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-red-50 hover:text-red-500 transition-colors"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  <div className="p-4">
+                    <p className="text-xs text-gray-400 capitalize mb-1">
+                      {item.category}
+                    </p>
+                    <h3 className="font-semibold text-gray-900 text-sm mb-2 line-clamp-1">
+                      {item.name}
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-[#0A7075]">
+                        ₹{item.price}
+                      </span>
+                      <Link
+                        to={`/products/${item.id}`}
+                        className="text-xs bg-[#031716] text-white px-3 py-1.5 rounded-full hover:bg-[#0A7075] transition-colors"
+                      >
+                        View
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
-        </AnimateOnScroll>
+          )}
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }
