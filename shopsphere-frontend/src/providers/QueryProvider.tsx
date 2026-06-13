@@ -4,10 +4,11 @@ import type { ReactNode } from "react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      gcTime: 1000 * 60 * 10, // keep in cache 10 minutes
+      staleTime: 1000 * 60 * 10,      // cache 10 minutes
+      gcTime: 1000 * 60 * 30,         // keep in memory 30 minutes
       retry: 1,
-      refetchOnWindowFocus: false, // ← stops unnecessary refetches
+      refetchOnWindowFocus: false,     // don't refetch when tab refocused
+      refetchOnMount: false,           // don't refetch if data exists
     },
   },
 });
