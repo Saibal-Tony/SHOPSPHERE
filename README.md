@@ -197,8 +197,6 @@ MIT License — feel free to use this project for learning or as a portfolio pie
 
 ---
 
-<div align="center">
-
 ## 👤 Author
 
 **Saibal Bera**
@@ -208,7 +206,8 @@ MIT License — feel free to use this project for learning or as a portfolio pie
 [![Email](https://img.shields.io/badge/Email-berasaibal20@gmail.com-6BA3BE?style=flat-square&logo=gmail)](mailto:berasaibal20@gmail.com)
 
 ---
-
+<div align="center">
+    
 *⭐ If you found this project helpful, please give it a star!*
 
 </div>
