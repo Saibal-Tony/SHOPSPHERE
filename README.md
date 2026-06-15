@@ -1,10 +1,17 @@
-# 🛍️ ShopSphere
+<div align="center">
 
-> A production-grade full-stack e-commerce platform built with a premium fashion-magazine aesthetic.
+<img src="public/logo.png" alt="ShopSphere Logo" width="120" height="120" />
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-shopsphere--shop.vercel.app-0C969C?style=for-the-badge&logo=vercel)](https://shopsphere-shop.vercel.app/)
-[![Backend](https://img.shields.io/badge/Backend-Railway-031716?style=for-the-badge&logo=railway)](https://shopsphere-production-fee5.up.railway.app/api/products)
-[![License](https://img.shields.io/badge/License-MIT-6BA3BE?style=for-the-badge)](LICENSE)
+# ShopSphere
+
+### A production-grade full-stack e-commerce platform with a premium fashion-magazine aesthetic.
+
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-shopsphere--shop.vercel.app-0C969C?style=for-the-badge)](https://shopsphere-shop.vercel.app/)
+[![Backend API](https://img.shields.io/badge/⚙️%20Backend%20API-Railway-031716?style=for-the-badge)](https://shopsphere-production-fee5.up.railway.app/api/products)
+[![GitHub](https://img.shields.io/badge/GitHub-Saibal--Tony-6BA3BE?style=for-the-badge&logo=github)](https://github.com/Saibal-Tony/SHOPSPHERE)
+[![License](https://img.shields.io/badge/License-MIT-0A7075?style=for-the-badge)](LICENSE)
+
+</div>
 
 ---
 
@@ -15,14 +22,14 @@
 - Advanced filtering by category, size, color, price range, availability and rating
 - Full-text search with instant results
 - Product detail pages with image gallery, size/color selection, reviews
-- Persistent wishlist (saved to localStorage)
+- Persistent wishlist saved to localStorage
 - Cart with quantity management and free shipping threshold
-- 3-step checkout flow (Address → Payment → Review)
+- 3-step checkout flow — Address → Payment → Review
 
 ### 🔐 Authentication
-- JWT-based auth with secure HttpOnly handling
-- User registration and login with BCrypt password hashing
-- Role-based access control (USER / ADMIN)
+- JWT-based auth with BCrypt password hashing
+- User registration and login
+- Role-based access control — USER / ADMIN
 - Protected routes on both frontend and backend
 
 ### ⚙️ Admin Dashboard
@@ -33,8 +40,8 @@
 
 ### 🎨 UI / UX
 - Premium fashion-magazine design with teal color palette
-- Cinematic page transitions (curtain animation)
-- Scroll-triggered animations (fade, slide from bottom/left/right)
+- Cinematic page transitions with curtain animation
+- Scroll-triggered animations — fade, slide from bottom/left/right
 - Auto-cycling editorial collage with directional image transitions
 - Beautiful loading screen with animated counter
 - Fully responsive — Mobile, Tablet, Desktop
@@ -83,7 +90,6 @@
 - Java JDK 17+
 - Maven
 - MySQL 8.0+
-- Docker (optional)
 
 ### 1. Clone the repository
 ```bash
@@ -104,8 +110,8 @@ FLUSH PRIVILEGES;
 cd shopsphere-backend
 mvn spring-boot:run
 ```
-Backend starts on `http://localhost:8080`
-Database auto-seeds with 50+ products on first run.
+> Backend starts on `http://localhost:8080`  
+> Database auto-seeds with 50+ products on first run.
 
 ### 4. Run Frontend
 ```bash
@@ -113,7 +119,7 @@ cd shopsphere-frontend
 npm install
 npm run dev
 ```
-Frontend starts on `http://localhost:5173`
+> Frontend starts on `http://localhost:5173`
 
 ---
 
@@ -121,14 +127,11 @@ Frontend starts on `http://localhost:5173`
 
 ### Frontend → Vercel
 ```bash
-cd shopsphere-frontend
-# Set environment variable in Vercel:
-# VITE_API_URL = https://your-backend.up.railway.app/api
-npm run build
+# Set this environment variable in Vercel dashboard:
+VITE_API_URL = https://your-backend.up.railway.app/api
 ```
 
 ### Backend → Railway
-Set these environment variables in Railway:
 ```
 DATABASE_URL      = jdbc:mysql://your-mysql-host:port/railway
 DATABASE_USERNAME = root
@@ -178,19 +181,6 @@ SHOPSPHERE/
 
 ---
 
-## 📸 Screenshots
-
-| Page | Preview |
-|---|---|
-| Home | Fashion-magazine hero with collage |
-| Products | Filter sidebar + product grid |
-| Product Detail | Image gallery, sizes, colors, add to cart |
-| Cart | Item management, free shipping indicator |
-| Checkout | 3-step flow with address + payment |
-| Admin | Dashboard with product & user management |
-
----
-
 ## 🔑 Default Admin Setup
 
 After registering an account, run this SQL to make yourself admin:
@@ -207,13 +197,18 @@ MIT License — feel free to use this project for learning or as a portfolio pie
 
 ---
 
+<div align="center">
+
 ## 👤 Author
 
 **Saibal Bera**
-- GitHub: [@Saibal-Tony](https://github.com/Saibal-Tony)
-- LinkedIn: [saibal-bera](https://linkedin.com/in/saibal-bera)
-- Email: berasaibal20@gmail.com
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-saibal--bera-0A7075?style=flat-square&logo=linkedin)](https://linkedin.com/in/saibal-bera)
+[![GitHub](https://img.shields.io/badge/GitHub-Saibal--Tony-031716?style=flat-square&logo=github)](https://github.com/Saibal-Tony)
+[![Email](https://img.shields.io/badge/Email-berasaibal20@gmail.com-6BA3BE?style=flat-square&logo=gmail)](mailto:berasaibal20@gmail.com)
 
 ---
 
-⭐ If you found this project helpful, please give it a star!
+*⭐ If you found this project helpful, please give it a star!*
+
+</div>
