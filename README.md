@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/logo.png" alt="ShopSphere Logo" width="120" height="120" />
+<img src="[public/logo.png](https://github.com/Saibal-Tony/SHOPSPHERE/blob/main/shopsphere-frontend/public/logo.png)" alt="ShopSphere Logo" width="120" height="120" />
 
 # ShopSphere
 
